@@ -6,10 +6,12 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import NavigationHome from 'material-ui/svg-icons/action/home'
 import ImagePanel from "./Image";
+
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {drawerOpen: false, tokenField: ''};
+        global.endpoints = this.props.endpoints;
         this.onAppBarOpenDrawer = this.onAppBarOpenDrawer.bind(this);
         this.onTextFieldChange = this.onTextFieldChange.bind(this);
         this.saveToken = this.saveToken.bind(this);

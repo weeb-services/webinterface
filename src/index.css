@@ -12,6 +12,18 @@ body {
 .image-panel {
     display:flex;
 }
+
+@media screen and (max-width: 600px) {
+    .image-panel {
+        flex-wrap: wrap;
+    }
+}
+
+.type-gallery {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
 .gallery {
 
 }

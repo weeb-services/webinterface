@@ -39,7 +39,9 @@ export default class Gallery extends React.Component {
             url: `${global.endpoints.image}/list`,
             headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}`},
             params: {
-                page: page
+                page: page,
+                type: this.props.type,
+                nsfw: false
             }
         });
     }
@@ -51,7 +53,7 @@ export default class Gallery extends React.Component {
         }
         return (<div className="gallery">
             <div className="gallery-header">
-                <h3>Image Gallery</h3>
+                <h3>Image Gallery for type {this.props.type}</h3>
                 <div className="gallery-page">
                     <PageSelector page={this.state.page} maxPage={Math.ceil(this.state.total / 25)}
                                   changePage={this.onPageChangeClick}/>
