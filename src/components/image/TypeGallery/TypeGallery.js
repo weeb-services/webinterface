@@ -3,7 +3,6 @@ import axios from 'axios';
 import {CircularProgress} from "material-ui";
 import TypeCardList from "./TypeCardList";
 
-const cardStyle = {margin: '10px', maxWidth: '250px'};
 export default class TypeGallery extends React.Component {
     constructor(props) {
         super(props);

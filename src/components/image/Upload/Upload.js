@@ -112,7 +112,7 @@ export default class Upload extends React.Component {
             if (!error) {
                 error = `Unknown Error`
             }
-            this.setState({error: error, uploading:false});
+            this.setState({error: error, uploading: false});
         }
     }
 
@@ -145,7 +145,9 @@ export default class Upload extends React.Component {
         } else {
             uploadMethod = <div><TextField disabled={this.state.uploading} id="url" value={this.state.urlTextfield}
                                            onChange={this.onUrlTextFieldChange}
-                                           floatingLabelText="Upload Image via direct url"/></div>
+                                           floatingLabelText="Upload Image via direct url"
+                                           floatingLabelStyle={{color: 'white'}}
+                                           inputStyle={{color: 'white'}}/></div>
         }
         if (this.state.uploading) {
             uploadSpinner = <CircularProgress/>
@@ -166,19 +168,22 @@ export default class Upload extends React.Component {
             {success}
             <TextField disabled={this.state.uploading} id="type" value={this.state.typeTextfield}
                        onChange={this.onTypeTextFieldChange}
-                       floatingLabelText="Type of the images" errorText={this.state.errorTypeTextField}/>
+                       floatingLabelText="Type of the images" errorText={this.state.errorTypeTextField}
+                       floatingLabelStyle={{color: 'white'}} inputStyle={{color: 'white'}}/>
             <br/>
             <TextField disabled={this.state.uploading} id="tags" value={this.state.tagTextfield}
                        onChange={this.onTagTextFieldChange}
-                       floatingLabelText="Tags of the images"/>
+                       floatingLabelStyle={{color: 'white'}}
+                       floatingLabelText="Tags of the images"
+                       inputStyle={{color: 'white'}}/>
             <br/>
             <Checkbox style={cbxStyle} iconStyle={iconStyle} disabled={this.state.uploading} label="Hidden?"
-                      onCheck={this.onHiddenCheckboxCheck}/>
+                      onCheck={this.onHiddenCheckboxCheck} labelStyle={{color: 'white'}}/>
             <Checkbox style={cbxStyle} iconStyle={iconStyle} disabled={this.state.uploading} label="NSFW/LEWD?"
-                      onCheck={this.onLewdCheckboxCheck}/>
+                      onCheck={this.onLewdCheckboxCheck} labelStyle={{color: 'white'}}/>
             <RadioButtonGroup name="uploadMethod" defaultSelected="files" onChange={this.onUploadRadioGroupChange}>
-                <RadioButton value="files" label="File Upload"/>
-                <RadioButton value="url" label="Url Upload"/>
+                <RadioButton value="files" label="File Upload" labelStyle={{color: 'white'}}/>
+                <RadioButton value="url" label="Url Upload" labelStyle={{color: 'white'}}/>
             </RadioButtonGroup>
             {uploadMethod}
             <div className="upload-start">
