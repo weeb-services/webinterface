@@ -62,7 +62,6 @@ export default class Upload extends React.Component {
         }
         this.setState({uploading: true});
         try {
-            console.log(window.localStorage.getItem('token'));
             if (this.state.uploadMethod === 'files') {
                 for (let i = 0; i < this.state.acceptedFiles.length; i++) {
                     let formData = new FormData();

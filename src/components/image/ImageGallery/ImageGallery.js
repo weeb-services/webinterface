@@ -11,7 +11,8 @@ const mapStateToProps = state => {
         page: state.image.page,
         images: state.image.images,
         fetching: state.image.fetching,
-        total: state.image.total
+        total: state.image.total,
+        category: state.image.category
     }
 };
 const mapDispatchToProps = dispatch => {
@@ -29,12 +30,11 @@ const mapDispatchToProps = dispatch => {
 class ImageGallery extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {page: 1, images: [], loading: false, total: 0, initialLoad: true};
         this.onPageChangeClick = this.onPageChangeClick.bind(this);
     }
 
     componentDidMount() {
-        this.props.fetchImageCategoryPageIfNeeded(this.props.page, this.props.type);
+        this.props.fetchImageCategoryPageIfNeeded(this.props.type === this.props.category ? this.props.page : 1, this.props.type);
     }
 
     onPageChangeClick(page) {
