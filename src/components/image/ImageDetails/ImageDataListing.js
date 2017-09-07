@@ -20,12 +20,12 @@ export default class ImageDataListing extends React.Component {
         }
         return (<div>
             <ul>
-                <li>ID: {this.props.image.id}</li>
-                <li>Type: {this.props.image.baseType}</li>
-                <li>Nsfw: {nsfw}</li>
-                <li>Hidden: {hidden}</li>
-                <li>Filetype: {this.props.image.fileType}</li>
-                <li>RawUrl: <a target="_blank" href={this.props.image.url}>{this.props.image.url}</a></li>
+                <p>ID: {this.props.image.id}</p>
+                <p>Type: {this.props.image.baseType}</p>
+                <p>Nsfw: {nsfw}</p>
+                <p>Hidden: {hidden}</p>
+                <p>Filetype: {this.props.image.fileType}</p>
+                <p>RawUrl: <a target="_blank" href={this.props.image.url}>{this.props.image.url}</a></p>
                 <ul>
                     {tagMap}
                 </ul>

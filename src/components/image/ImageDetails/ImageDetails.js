@@ -23,19 +23,22 @@ class ImageDetails extends React.Component {
 
     render() {
         let loadingSpinner;
+        let dataListing;
         if (this.props.fetching) {
             loadingSpinner = <CircularProgress/>
+        } else {
+            dataListing = <ImageDataListing image={this.props.image}/>;
         }
         return (<div>
-            {loadingSpinner}
             <h2>Image details of image {this.props.image.id}</h2>
+            {loadingSpinner}
             <div className="flex">
                 <div>
                     <img className="image-detail"
                          src={this.props.image.url}/>
                 </div>
                 <div>
-                    <ImageDataListing image={this.props.image}/>
+                    {dataListing}
                 </div>
             </div>
         </div>)
