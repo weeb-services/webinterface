@@ -1,45 +1,67 @@
 import React from 'react';
-import {Card, CardMedia, CardTitle} from "material-ui";
+import {fetchAccountsDiscord, fetchAccountsIroh} from "../../../actionCreators/accountActionCreators";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import AccountList from "./AccountList";
+import {CircularProgress} from "material-ui";
 
-const wolkeAvatar = "https://cdn.discordapp.com/avatars/128392910574977024/a_226d78e3df190b9f2defbd54b426d409.gif?size=1024&f=.gif";
-export default class AccountOverview extends React.Component {
+const mapStateToProps = state => {
+    return {
+        accounts: state.accounts.accounts,
+        fetching: state.accounts.fetching,
+        page: state.accounts.page,
+        discordAccounts: state.accounts.discordAccounts,
+        error: state.accounts.error
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchIrohAccounts: (page) => {
+            dispatch(fetchAccountsIroh(page));
+        },
+        fetchDiscordAccounts: () => {
+            dispatch(fetchAccountsDiscord());
+        }
+    }
+};
+
+class AccountOverview extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    render() {
-        const imgStyle = {
-            backgroundImage: `url(${wolkeAvatar })`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            width: '200px',
-            height: '200px'
-        };
-        {/*<List>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*<ListItem style={{color: 'white'}} primaryText="Wolke" leftAvatar={<Avatar src={wolkeAvatar}/>}/>*/
-        }
-        {/*</List>*/
-        }
-        return (<div>
-            <Card>
-                <CardMedia overlay={<CardTitle title='Wolke' subtitle="Wolke#5985"/>}>
-                    <div style={imgStyle}/>
-                </CardMedia>
+    componentDidMount() {
+        this.props.fetchIrohAccounts(this.props.page);
+        this.props.fetchDiscordAccounts();
+    }
 
-            </Card>
+    render() {
+        let spinner;
+        let errorMessage;
+        if (this.props.fetching) {
+            spinner = <CircularProgress/>
+        }
+        if (this.props.error) {
+            errorMessage = <div><p>Oh nu :( an error occured!</p><p>{this.props.error}</p></div>
+        }
+        let combinedAccounts = this.props.accounts;
+        combinedAccounts.map(ca => {
+            let discordAccount = this.props.discordAccounts.find(da => da.id === ca.discordUserId);
+            ca.discord = {};
+            if (discordAccount) {
+                Object.assign(ca.discord, discordAccount);
+            }
+            return ca;
+        });
+        return (<div>
+            <h2>Account List</h2>
+            {spinner}
+            {errorMessage}
+            <AccountList accounts={combinedAccounts}/>
         </div>)
     }
 }
+
+const ConnectedAccountOverview = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountOverview));
+export default ConnectedAccountOverview;

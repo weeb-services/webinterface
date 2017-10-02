@@ -8,6 +8,10 @@ body {
     color: white;
 }
 
+.dark-af {
+    background-color: #23272A;
+}
+
 .content {
     padding: 10px;
 }
@@ -22,6 +26,20 @@ body {
     }
 }
 
+.image-wrapper {
+    padding: 0 10px;
+}
+
+.image-header {
+    margin: 5px 0;
+}
+.image-detail-wrapper {
+    margin: 0 20px;
+}
+.image-data-wrapper {
+    margin: 0 10px;
+}
+
 .type-gallery {
     display: flex;
     align-items: baseline;
@@ -29,7 +47,7 @@ body {
 }
 
 .gallery {
-
+    padding: 10px;
 }
 
 .gallery-header {
@@ -70,7 +88,7 @@ body {
 }
 
 .image-upload {
-    padding: 20px;
+    background-color: #23272A;
 }
 
 .upload-start {

@@ -6,6 +6,10 @@ import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
-let endpoints = {image: 'https://api.weeb.sh/images', apiAccount: 'https://api.weeb.sh/accounts'};
+let endpoints = {
+    image: 'http://localhost:9000',
+    apiAccount: 'http://localhost:9010',
+    discordData: 'http://localhost:9012'
+};
 ReactDOM.render(<App endpoints={endpoints}/>, document.getElementById('root'));
 registerServiceWorker();

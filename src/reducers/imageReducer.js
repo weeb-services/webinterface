@@ -14,13 +14,19 @@ const initialState = {
     fetching: false,
     error: '',
     category: '',
+    nsfw: 'false',
     imageDetail: {}
 };
 
 export default function image(state = initialState, action) {
     switch (action.type) {
         case FETCH_IMAGE_CATEGORY_PAGE:
-            return Object.assign({}, state, {fetching: true, page: action.page, category: action.category});
+            return Object.assign({}, state, {
+                fetching: true,
+                page: action.page,
+                category: action.category,
+                nsfw: action.nsfw
+            });
         case FETCH_IMAGE_CATEGORY_PAGE_SUCCESS:
             return Object.assign({}, state, {fetching: false, images: action.images, total: action.total});
         case FETCH_IMAGE_CATEGORY_PAGE_FAILURE:

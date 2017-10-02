@@ -36,18 +36,22 @@ export default class TypeGallery extends React.Component {
     }
 
     loadTypeRequest() {
+        let tokenType = window.localStorage.getItem('tokenType') || 'Bearer';
+        let apiToken = window.localStorage.getItem('token');
         return axios({
             url: `${global.endpoints.image}/types`,
             params: {nsfw: this.state.nsfw},
-            headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}`}
+            headers: {Authorization: `${tokenType} ${apiToken}`}
         });
     }
 
     async fetchTypePreview(type) {
+        let tokenType = window.localStorage.getItem('tokenType') || 'Bearer';
+        let apiToken = window.localStorage.getItem('token');
         return axios({
             url: `${global.endpoints.image}/random`,
             params: {type, nsfw: this.state.nsfw},
-            headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}`}
+            headers: {Authorization: `${tokenType} ${apiToken}`}
         });
     }
 
@@ -72,7 +76,7 @@ export default class TypeGallery extends React.Component {
         if (this.state.loading) {
             spinner = <CircularProgress/>
         }
-        return (<div className="type-gallery">
+        return (<div className="type-gallery dark-af">
             {errorMessage}
             {spinner}
             <TypeCardList types={this.state.types}/>

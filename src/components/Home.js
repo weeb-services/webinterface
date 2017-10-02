@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, Route, withRouter} from 'react-router-dom';
 import Panel from "./Panel";
-import {AppBar, Drawer, IconButton, MenuItem, RaisedButton, TextField} from "material-ui";
+import {AppBar, Checkbox, Drawer, IconButton, MenuItem, RaisedButton, TextField} from "material-ui";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import NavigationHome from 'material-ui/svg-icons/action/home'
@@ -22,10 +22,11 @@ const mapDispatchToProps = dispatch => {
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {tokenField: ''};
+        this.state = {tokenField: '', wolkeToken: false};
         global.endpoints = this.props.endpoints;
         this.onAppBarOpenDrawer = this.onAppBarOpenDrawer.bind(this);
         this.onTextFieldChange = this.onTextFieldChange.bind(this);
+        this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
         this.saveToken = this.saveToken.bind(this);
     }
 
@@ -37,17 +38,28 @@ class Home extends React.Component {
         this.setState({tokenField: event.target.value});
     }
 
+    onCheckBoxChange() {
+        this.setState({wolkeToken: !this.state.wolkeToken});
+    }
+
     saveToken() {
         window.localStorage.setItem('token', this.state.tokenField);
-        this.setState({tokenField: ''});
+        window.localStorage.setItem('tokenType', this.state.wolkeToken ? 'Wolke' : 'Bearer');
+        this.setState({tokenField: '', wolkeToken: false});
     }
 
     render() {
+        let cbxStyle = {display: 'inline-flex', width: 'auto', paddingRight: '5px'};
+        let iconStyle = {marginRight: '2px'};
         const form = () => {
             return (<div>
                 <p>Save token in localStorage</p>
                 <form>
-                    <TextField id="token-input" value={this.state.tokenField} onChange={this.onTextFieldChange}/>
+                    <div className="flex">
+                        <TextField id="token-input" value={this.state.tokenField} onChange={this.onTextFieldChange}/>
+                        <Checkbox label="Wolketoken" checked={this.state.wolkeToken} onCheck={this.onCheckBoxChange}
+                                  labelStyle={{color: 'white'}} style={cbxStyle} iconStyle={iconStyle} />
+                    </div>
                     <RaisedButton type="button" label="Save" onClick={this.saveToken}/>
                 </form>
             </div>)
@@ -80,7 +92,7 @@ class Home extends React.Component {
                     </MenuItem>
                 </Link>
             </Drawer>
-            <div className="content">
+            <div className="content dark-af">
                 <Route path="/" exact component={form}/>
                 <Route path="/panel" component={Panel}/>
                 <Route path="/image" component={ImagePanel}/>

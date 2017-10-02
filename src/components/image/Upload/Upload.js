@@ -61,6 +61,8 @@ export default class Upload extends React.Component {
             return this.setState({errorTypeTextField: 'Missing Type'})
         }
         this.setState({uploading: true});
+        let tokenType = window.localStorage.getItem('tokenType') || 'Bearer';
+        let apiToken = window.localStorage.getItem('token');
         try {
             if (this.state.uploadMethod === 'files') {
                 for (let i = 0; i < this.state.acceptedFiles.length; i++) {
@@ -70,11 +72,11 @@ export default class Upload extends React.Component {
                     formData.append('hidden', this.state.hiddenCheckbox);
                     formData.append('nsfw', this.state.lewdCheckbox);
                     formData.append('tags', this.state.tagTextfield);
-                    let uploadRequest = await axios({
+                    await axios({
                         url: `${global.endpoints.image}/upload`,
                         method: 'post',
                         headers: {
-                            Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+                            Authorization: `${tokenType} ${apiToken}`,
                             'Content-Type': 'multipart/form-data'
                         },
                         data: formData
@@ -87,10 +89,10 @@ export default class Upload extends React.Component {
                 formData.append('hidden', this.state.hiddenCheckbox);
                 formData.append('nsfw', this.state.lewdCheckbox);
                 formData.append('tags', this.state.tagTextfield);
-                let uploadRequest = await axios({
+                await axios({
                     url: `${global.endpoints.image}/upload`,
                     method: 'post',
-                    headers: {Authorization: `Bearer ${window.localStorage.getItem('token')}`},
+                    headers: {Authorization: `${tokenType} ${apiToken}`},
                     data: formData
                 });
 

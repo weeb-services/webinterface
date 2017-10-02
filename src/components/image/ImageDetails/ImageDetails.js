@@ -29,17 +29,15 @@ class ImageDetails extends React.Component {
         } else {
             dataListing = <ImageDataListing image={this.props.image}/>;
         }
-        return (<div>
+        return (<div className="image-detail-wrapper">
             <h2>Image details of image {this.props.image.id}</h2>
             {loadingSpinner}
             <div className="flex">
                 <div>
                     <img className="image-detail"
-                         src={this.props.image.url}/>
+                         src={this.props.image.url} alt={`details of ${this.props.image.id}`}/>
                 </div>
-                <div>
-                    {dataListing}
-                </div>
+                {dataListing}
             </div>
         </div>)
     }
