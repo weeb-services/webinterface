@@ -48,7 +48,7 @@ class PageSelector extends React.Component {
                 nsfwIcon = <AddIcon color="green"/>;
                 break;
             default:
-                nsfwIcon = <BlockIcon/>;
+                nsfwIcon = <BlockIcon color="red"/>;
                 break;
         }
         return (<div className="gallery-pageselector">

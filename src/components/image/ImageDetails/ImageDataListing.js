@@ -2,6 +2,7 @@ import React from 'react';
 import Check from 'material-ui/svg-icons/action/done';
 import Cross from 'material-ui/svg-icons/content/clear';
 import {Chip} from "material-ui";
+
 const tagStyle = {marginRight:'5px', backgroundColor:'#393d40'};
 export default class ImageDataListing extends React.Component {
     render() {
@@ -16,7 +17,7 @@ export default class ImageDataListing extends React.Component {
         }
         if (this.props.image.tags) {
             this.props.image.tags.forEach(t => {
-                tagMap.push(<Chip style={tagStyle}>{t.name}</Chip>)
+                tagMap.push(<Chip style={tagStyle} labelColor="#ffffff">{t.name}</Chip>)
             });
         }
         return (<div className="image-data-wrapper">

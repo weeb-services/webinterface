@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchAccountsDiscord, fetchAccountsIroh} from "../../../actionCreators/accountActionCreators";
+import {fetchIrohAndDiscordUsers} from "../../../actionCreators/accountActionCreators";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import AccountList from "./AccountList";
@@ -17,23 +17,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchIrohAccounts: (page) => {
-            dispatch(fetchAccountsIroh(page));
-        },
-        fetchDiscordAccounts: () => {
-            dispatch(fetchAccountsDiscord());
+        fetchAccounts: (page) => {
+            dispatch(fetchIrohAndDiscordUsers(page));
         }
     }
 };
 
 class AccountOverview extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        this.props.fetchIrohAccounts(this.props.page);
-        this.props.fetchDiscordAccounts();
+        this.props.fetchAccounts(1)
     }
 
     render() {
@@ -47,10 +39,15 @@ class AccountOverview extends React.Component {
         }
         let combinedAccounts = this.props.accounts;
         combinedAccounts.map(ca => {
-            let discordAccount = this.props.discordAccounts.find(da => da.id === ca.discordUserId);
+            let discordAccount;
+            if (this.props.discordAccounts && this.props.discordAccounts.length > 0) {
+                discordAccount = this.props.discordAccounts.find(da => da.id === ca.discordUserId);
+            }
             ca.discord = {};
             if (discordAccount) {
                 Object.assign(ca.discord, discordAccount);
+            } else {
+                Object.assign(ca.discord, {avatar: 'https://cdn.weeb.sh/404.png', fulluser: 'User not in Guild'})
             }
             return ca;
         });
