@@ -5,10 +5,9 @@ import AccountDetails from "./AccountDetails/AccountDetails";
 
 export default class AccountPanel extends React.Component {
     render() {
-        return (<div className="flex">
+        return (<div className="flex flex-grow flex-column">
             <Route path="/account" exact component={AccountOverview}/>
-            <Route path="/account/:id" exact
-                   component={({match}) => <AccountDetails id={match.params.id}/>}/>
+            <Route path="/account/:id" exact component={({match}) => <AccountDetails id={match.params.id}/>}/>
         </div>)
     }
 }

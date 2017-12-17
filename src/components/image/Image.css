@@ -1,0 +1,14 @@
+.image-wrapper {
+    padding: 10px;
+}
+
+.image-header {
+    margin: 5px 0;
+}
+
+@media screen  and (max-width: 500px) {
+    .image-content-wrapper {
+        flex-wrap: wrap;
+    }
+}
+

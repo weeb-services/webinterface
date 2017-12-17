@@ -1,23 +1,49 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
+html, body {
+    background-color: #23272A;
+}
 body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #23272A;
     color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }
 
 .dark-af {
     background-color: #23272A;
 }
 
-.content {
-    padding: 10px;
+.middle-dark-af {
+    background-color: #2e3438;
 }
 
-.flex {
-    display: flex;
+.lighter-dark-af {
+    background-color: #515a61;
+}
+
+.content {
+    padding: 10px;
 }
 
 @media screen and (max-width: 600px) {
@@ -26,16 +52,10 @@ body {
     }
 }
 
-.image-wrapper {
-    padding: 0 10px;
-}
-
-.image-header {
-    margin: 5px 0;
-}
 .image-detail-wrapper {
     margin: 0 20px;
 }
+
 .image-data-wrapper {
     margin: 0 10px;
 }
@@ -48,6 +68,7 @@ body {
 
 .gallery {
     padding: 10px;
+    width: 100%;
 }
 
 .gallery-header {
@@ -87,10 +108,6 @@ body {
     height: auto;
 }
 
-.image-upload {
-    background-color: #23272A;
-}
-
 .upload-start {
     margin: 10px;
     display: flex;
@@ -98,4 +115,8 @@ body {
 
 .error {
     color: #bc1219;
+}
+
+.full-width {
+    width: 100%;
 }

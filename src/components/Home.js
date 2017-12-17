@@ -50,23 +50,23 @@ class Home extends React.Component {
 
     render() {
         let cbxStyle = {display: 'inline-flex', width: 'auto', paddingRight: '5px'};
-        let iconStyle = {marginRight: '2px'};
+        let iconStyle = {marginRight: '2px', fill: '#3498DB'};
         const form = () => {
-            return (<div>
+            return (<div className="content">
                 <p>Save token in localStorage</p>
                 <form>
                     <div className="flex">
                         <TextField id="token-input" value={this.state.tokenField} onChange={this.onTextFieldChange}/>
                         <Checkbox label="Wolketoken" checked={this.state.wolkeToken} onCheck={this.onCheckBoxChange}
-                                  labelStyle={{color: 'white'}} style={cbxStyle} iconStyle={iconStyle} />
+                                  labelStyle={{color: 'white'}} style={cbxStyle} iconStyle={iconStyle}/>
                     </div>
                     <RaisedButton type="button" label="Save" onClick={this.saveToken}/>
                 </form>
             </div>)
         };
-        return (<div>
+        return (<div className="flex flex-column flex-grow">
             <AppBar title="weeb.sh api panel"
-                    style={{backgroundColor: '#393d40'}}
+                    style={{backgroundColor: '#393d40', flexShrink: 0}}
                     iconElementLeft={<IconButton onClick={this.onAppBarOpenDrawer}><NavigationMenu/></IconButton>}/>
             <Drawer docked={false} open={this.props.drawerOpen} onRequestChange={this.onAppBarOpenDrawer}
                     containerStyle={{backgroundColor: '#393d40'}}>
@@ -92,7 +92,7 @@ class Home extends React.Component {
                     </MenuItem>
                 </Link>
             </Drawer>
-            <div className="content dark-af">
+            <div className="dark-af flex flex-column flex-grow">
                 <Route path="/" exact component={form}/>
                 <Route path="/panel" component={Panel}/>
                 <Route path="/image" component={ImagePanel}/>

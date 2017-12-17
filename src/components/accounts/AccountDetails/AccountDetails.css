@@ -1,0 +1,45 @@
+.details-wrapper {
+    flex-direction: column;
+}
+
+.half {
+    width: 50%;
+}
+
+.one-third {
+    width: 30%;
+}
+
+.profile {
+    padding: 10px;
+}
+
+.profile-data-wrapper {
+    margin: 0 10px 0 5px;
+}
+
+.perm-list {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.permission {
+    padding: 20px 10px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.perm-detail {
+    width: 100%;
+}
+
+.perm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.perm-header h2 {
+    margin: 0;
+}

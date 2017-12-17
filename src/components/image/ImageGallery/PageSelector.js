@@ -10,9 +10,9 @@ import {withRouter} from "react-router-dom";
 
 const mapStateToProps = state => {
     return {
-        total: state.image.total,
-        page: state.image.page,
-        maxPage: Math.ceil(state.image.total / 25)
+        total: state.image.gallery.total,
+        page: state.image.gallery.page,
+        maxPage: Math.ceil(state.image.gallery.total / 25)
     }
 };
 class PageSelector extends React.Component {
@@ -53,14 +53,14 @@ class PageSelector extends React.Component {
         }
         return (<div className="gallery-pageselector">
             NSFW:
-            <IconButton tooltip={this.props.nsfw} onTouchTap={this.onNsfwButtonClick}>
+            <IconButton tooltip={this.props.nsfw} onClick={this.onNsfwButtonClick}>
                 {nsfwIcon}
             </IconButton>
             <IconButton
-                disabled={this.props.page <= 1} onTouchTap={this.onBackButtonClick}><NavigationBack/>
+                disabled={this.props.page <= 1} onClick={this.onBackButtonClick}><NavigationBack/>
             </IconButton>
             {this.props.page}/{this.props.maxPage}
-            <IconButton onTouchTap={this.onForwardButtonClick}
+            <IconButton onClick={this.onForwardButtonClick}
                         disabled={this.props.page === this.props.maxPage}><NavigationForward/>
             </IconButton>
         </div>);

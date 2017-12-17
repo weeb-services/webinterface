@@ -162,7 +162,7 @@ export default class Upload extends React.Component {
             success = <p>Uploaded Images successfully!</p>
         }
         let cbxStyle = {display: 'inline-flex', width: 'auto', paddingRight: '5px'};
-        let iconStyle = {marginRight: '2px'};
+        let iconStyle = {marginRight: '2px', fill: '#3498DB'};
         return (<div className="image-upload">
             <h3>Upload Images</h3>
             {error}
@@ -183,8 +183,10 @@ export default class Upload extends React.Component {
             <Checkbox style={cbxStyle} iconStyle={iconStyle} disabled={this.state.uploading} label="NSFW/LEWD?"
                       onCheck={this.onLewdCheckboxCheck} labelStyle={{color: 'white'}}/>
             <RadioButtonGroup name="uploadMethod" defaultSelected="files" onChange={this.onUploadRadioGroupChange}>
-                <RadioButton value="files" label="File Upload" labelStyle={{color: 'white'}}/>
-                <RadioButton value="url" label="Url Upload" labelStyle={{color: 'white'}}/>
+                <RadioButton value="files" label="File Upload" labelStyle={{color: 'white'}}
+                             iconStyle={{fill: '#3498DB'}}/>
+                <RadioButton value="url" label="Url Upload" labelStyle={{color: 'white'}}
+                             iconStyle={{fill: '#3498DB'}}/>
             </RadioButtonGroup>
             {uploadMethod}
             <div className="upload-start">

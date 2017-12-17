@@ -1,12 +1,12 @@
 import React from 'react';
 import ImageDataListing from "./ImageDataListing";
-import {fetchImageDetail} from "../../../actionCreators/imageActionCreators";
+import {fetchImageDetail} from "./ImageDetailsActionCreator";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CircularProgress} from "material-ui";
 
 const mapStateToProps = state => {
-    return {image: state.image.imageDetail, fetching: state.image.fetching}
+    return {image: state.image.details.imageDetail, fetching: state.image.fetching}
 };
 const mapDispatchToProps = dispatch => {
     return {

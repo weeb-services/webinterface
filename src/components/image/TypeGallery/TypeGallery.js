@@ -1,85 +1,50 @@
 import React from 'react';
-import axios from 'axios';
 import {CircularProgress} from "material-ui";
 import TypeCardList from "./TypeCardList";
+import {fetchTypeGallery} from "./TypeGalleryActionCreators";
+import {connect} from "react-redux";
 
-export default class TypeGallery extends React.Component {
+const mapStateToProps = state => {
+    return {
+        types: state.image.typeGallery.types,
+        previews: state.image.typeGallery.previews,
+        fetching: state.image.typeGallery.fetching,
+        error: state.image.typeGallery.error
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchTypes: () => {
+            dispatch(fetchTypeGallery())
+        }
+    }
+};
+
+class TypeGallery extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {initialized: false, loading: false, types: [], error: '', nsfw: 'false'}
-    }
-
-    async loadTypes() {
-        this.setState({loading: true});
-        try {
-            let req = await this.loadTypeRequest();
-            if (!req.data.types || req.data.types.length === 0) {
-                this.setState({loading: false, error: 'No types found, upload images to fill this gallery'});
-                return;
-            }
-            let types = [];
-            req.data.types.sort();
-            for (let type of req.data.types) {
-                let typeReq = await this.fetchTypePreview(type);
-                if (!typeReq.data.url) {
-                    typeReq.data.url = '';
-                }
-                types.push({name: type, preview: typeReq.data.url});
-            }
-            window.localStorage.setItem('types', JSON.stringify(types));
-            window.localStorage.setItem('types-age', Date.now());
-            this.setState({types});
-        } catch (e) {
-            this.setState({error: e});
-        }
-        this.setState({loading: false});
-    }
-
-    loadTypeRequest() {
-        let tokenType = window.localStorage.getItem('tokenType') || 'Bearer';
-        let apiToken = window.localStorage.getItem('token');
-        return axios({
-            url: `${global.endpoints.image}/types`,
-            params: {nsfw: this.state.nsfw},
-            headers: {Authorization: `${tokenType} ${apiToken}`}
-        });
-    }
-
-    async fetchTypePreview(type) {
-        let tokenType = window.localStorage.getItem('tokenType') || 'Bearer';
-        let apiToken = window.localStorage.getItem('token');
-        return axios({
-            url: `${global.endpoints.image}/random`,
-            params: {type, nsfw: this.state.nsfw},
-            headers: {Authorization: `${tokenType} ${apiToken}`}
-        });
     }
 
     async componentDidMount() {
-        let types = window.localStorage.getItem('types');
-        let typesAge = window.localStorage.getItem('types-age');
-        if (types && typesAge > Date.now() - (3600 * 1000)) {
-            types = JSON.parse(types);
-            this.setState({types})
-        } else {
-            await this.loadTypes();
-        }
-
+        this.props.fetchTypes();
     }
 
     render() {
         let errorMessage;
         let spinner;
-        if (this.state.error) {
+        if (this.props.error) {
             errorMessage = <p>Oh nu :( an error occured!</p>
         }
-        if (this.state.loading) {
+        if (this.props.fetching) {
             spinner = <CircularProgress/>
         }
         return (<div className="type-gallery dark-af">
             {errorMessage}
             {spinner}
-            <TypeCardList types={this.state.types}/>
+            <TypeCardList types={this.props.types} previews={this.props.previews}/>
         </div>);
     }
 }
+
+const ConnectedTypeGallery = connect(mapStateToProps, mapDispatchToProps)(TypeGallery);
+export default ConnectedTypeGallery;

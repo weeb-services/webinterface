@@ -2,9 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {fetchIrohAndDiscordDetails} from "../../../actionCreators/accountActionCreators";
-import {CircularProgress, RaisedButton} from "material-ui";
+import {CircularProgress, List, ListItem, RaisedButton} from "material-ui";
 import BlockIcon from 'material-ui/svg-icons/content/block';
 import DoneIcon from 'material-ui/svg-icons/action/done';
+import './AccountDetails.css';
+import PermissionList from "./Permissions/PermissionList";
 
 const mapStateToProps = state => {
     return {
@@ -47,23 +49,40 @@ class AccountDetails extends React.Component {
             }
         }
         const btnStyle = {margin: '10px'};
-        return (<div>
-            {spinner}
-            <div className="flex">
-                <div>
-                    <img src={this.props.discordAccount.avatar} className="image-single"/>
+        const imgStyle = {
+            backgroundImage: `url(${this.props.discordAccount.avatar ? this.props.discordAccount.avatar : 'https://cdn.weeb.sh/404.png'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            width: '200px',
+            height: '200px'
+        };
+        return (<div className="flex flex-grow full-width">
+            <div className="flex flex-grow half">
+                {spinner}
+                <div className="flex flex-grow half middle-dark-af details-wrapper">
+                    <div className="flex profile">
+                        <div style={imgStyle}/>
+                        <div className="image-data-wrapper">
+                            <p>ID: {this.props.account.id}</p>
+                            <p>Name: {this.props.account.name}</p>
+                            <p>Discord ID: {this.props.account.discordUserId}</p>
+                            <p>Active: {activeIcon}</p>
+                        </div>
+                    </div>
+                    <div className="flex">
+                        <RaisedButton label="Primary" primary={true} style={btnStyle}/>
+                        <RaisedButton label="Primary" primary={true} style={btnStyle}/>
+                        <RaisedButton label="Primary" primary={true} style={btnStyle}/>
+                    </div>
                 </div>
-                <div className="image-data-wrapper">
-                    <p>ID: {this.props.account.id}</p>
-                    <p>Name: {this.props.account.name}</p>
-                    <p>Discord ID: {this.props.account.discordUserId}</p>
+                <div className="flex flex-grow one-third middle-dark-af details-wrapper">
+                    <List className="full-width">
+                        <ListItem style={{color: '#ffffff'}} innerDivStyle={{textAlign: 'right'}}>Permissions</ListItem>
+                        <ListItem style={{color: '#ffffff'}} innerDivStyle={{textAlign: 'right'}}>Tokens</ListItem>
+                    </List>
                 </div>
             </div>
-            <div>
-                <RaisedButton label="Primary" primary={true} style={btnStyle}/>
-                <RaisedButton label="Primary" primary={true} style={btnStyle}/>
-                <RaisedButton label="Primary" primary={true} style={btnStyle}/>
-            </div>
+            <PermissionList/>
         </div>)
     }
 }

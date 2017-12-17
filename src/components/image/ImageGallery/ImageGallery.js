@@ -2,18 +2,18 @@ import React from 'react';
 import ImageList from "./ImageList";
 import {CircularProgress} from "material-ui";
 import PageSelector from "./PageSelector";
-import {cycleNsfw, fetchImageCategoryPageIfNeeded, switchPage} from "../../../actionCreators/imageActionCreators";
+import {cycleNsfw, fetchImageCategoryPageIfNeeded, switchPage} from "./ImageGalleryActionCreators";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 const mapStateToProps = state => {
     return {
-        page: state.image.page,
-        images: state.image.images,
-        fetching: state.image.fetching,
-        total: state.image.total,
-        category: state.image.category,
-        nsfw: state.image.nsfw
+        page: state.image.gallery.page,
+        images: state.image.gallery.images,
+        fetching: state.image.gallery.fetching,
+        total: state.image.gallery.total,
+        category: state.image.gallery.category,
+        nsfw: state.image.gallery.nsfw
     }
 };
 const mapDispatchToProps = dispatch => {
@@ -75,6 +75,7 @@ class ImageGallery extends React.Component {
             <div className="gallery-header">
                 <h3>Type: {this.props.type}</h3>
                 <div className="gallery-page">
+
                     <PageSelector changePage={this.onPageChangeClick} cycleNsfw={this.onNsfwCycleClick} nsfw={this.props.nsfw}/>
                     <h3>
                         Images {(this.props.page - 1) * 25 + 1}-{this.props.page * 25 > this.props.total ? this.props.total : this.props.page * 25}</h3>

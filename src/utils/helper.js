@@ -3,3 +3,7 @@ export function getAuthString() {
     let apiToken = window.localStorage.getItem('token');
     return `${tokenType} ${apiToken}`;
 }
+
+export function generatePermNode(permName, apiName) {
+    return `${apiName}:${permName}`;
+}

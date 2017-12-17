@@ -1,0 +1,12 @@
+{
+  "apiIdentifier": "general",
+  "permNodes": [
+    {
+      "name": "admin",
+      "description": "Grants all permissions on every api, USE WITH CAUTION",
+      "routes": [
+        "*"
+      ]
+    }
+  ]
+}

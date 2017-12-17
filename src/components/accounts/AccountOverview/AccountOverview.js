@@ -35,7 +35,7 @@ class AccountOverview extends React.Component {
             spinner = <CircularProgress/>
         }
         if (this.props.error) {
-            errorMessage = <div><p>Oh nu :( an error occured!</p><p>{this.props.error}</p></div>
+            errorMessage = <div><p>Oh nu :( an error occured!</p><p>{this.props.error.toString()}</p></div>
         }
         let combinedAccounts = this.props.accounts;
         combinedAccounts.map(ca => {
@@ -51,7 +51,7 @@ class AccountOverview extends React.Component {
             }
             return ca;
         });
-        return (<div>
+        return (<div className="content">
             <h2>Account List</h2>
             {spinner}
             {errorMessage}
