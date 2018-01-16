@@ -1,8 +1,9 @@
-import React from 'react';
-import TypeCard from "./TypeCard";
+import React from 'react'
+import TypeCard from './TypeCard'
 
 export default class TypeCardList extends React.Component {
     mapPreviewToType(types, previews) {
+      types = types.sort()
         return types.map(type => {
             let typeObject = {name: type};
             typeObject.preview = previews.find(preview => preview.baseType === type).url;

@@ -1,7 +1,7 @@
-import Dropzone from "react-dropzone";
-import React from "react";
-import {Checkbox, CircularProgress, RadioButton, RadioButtonGroup, RaisedButton, TextField} from "material-ui";
-import axios from "axios";
+import Dropzone from 'react-dropzone'
+import React from 'react'
+import { Checkbox, CircularProgress, RadioButton, RadioButtonGroup, RaisedButton, TextField } from 'material-ui'
+import axios from 'axios'
 
 export default class Upload extends React.Component {
     constructor(props) {
@@ -98,7 +98,7 @@ export default class Upload extends React.Component {
 
             }
             this.setState({
-                success: true, uploading: false, acceptedFiles: []
+              success: true, uploading: false, acceptedFiles: [], error: ''
             });
         } catch (e) {
             console.error(e);
